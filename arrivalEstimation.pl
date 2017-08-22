@@ -14,7 +14,10 @@ sub doCalculation{
     my $tripTimeInHours = $nm / $avgKts;
     
     my $tripTimeInDays = $tripTimeInHours / 24;
-    my $arrivalTime = ($tripTimeInHours % 24) - (24 - $depTime);
+    printf("part1: ".($tripTimeInHours % 24).", part2: ".($depTime - 24)."\n");
+    my $arrivalTime = ($tripTimeInHours % 24) + ($depTime - 24);
+    $arrivalTime = $arrivalTime % 24 if($arrivalTime < 0);
+    $arrivalTime = 24 if($arrivalTime == 0);
     
     print("Departure: $depTime:00\n");
     print("nmPerDay: $nmPerDay\n");
@@ -26,7 +29,7 @@ sub doCalculation{
 
 my $nm;
 my $avgKts;
-my $depTime = 20;
+my $depTime = 24;
 
 while(!looks_like_number($nm)){
     print("Total trip nautical miles: ");
